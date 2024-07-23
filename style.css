@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(#5e1f1f, #3c0f0f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+}
+
+#calculator {
+    height: 75vh;
+    width: 35vw;
+    border: solid red 2px;
+    border-radius: 8px;
+}
