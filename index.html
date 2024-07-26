@@ -8,42 +8,42 @@
 </head>
 <body>
     <div id="calculator">
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col" id="output">0</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table-row">
-                    <td><button class="function" id="all-clear">AC</button></td>
-                    <td><button class="operator" id="divide">÷</button></td>
-                </tr>
-                <tr class="table-row">
-                    <td><button class="number" id="calc-7">7</button></td>
-                    <td><button class="number" id="calc-8">8</button></td>
-                    <td><button class="number" id="calc-9">9</button></td>
-                    <td><button class="operator" id="multiply">×</button></td>
-                </tr>
-                <tr class="table-row">
-                    <td><button class="number" id="calc-4">4</button></td>
-                    <td><button class="number" id="calc-5">5</button></td>
-                    <td><button class="number" id="calc-6">6</button></td>
-                    <td><button class="operator" id="subtract">-</button></td>
-                </tr>
-                <tr class="table-row">
-                    <td><button class="number" id="calc-1">1</button></td>
-                    <td><button class="number" id="calc-2">2</button></td>
-                    <td><button class="number" id="calc-3">3</button></td>
-                    <td><button class="operator" id="add">+</button></td>
-                </tr>
-                <tr class="table-row">
-                    <td><button class="number" id="calc-0">0</button></td>
-                    <td><button class="number" id="dec-point">.</button></td>
-                    <td><button class="operator" id="equals">=</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div id="output-container">
+            <h1 id="output-text">0</h1>
+        </div>
+
+        <div class="row">
+            <div class="button-container" id="all-clear-container"><button class="function" id="all-clear">AC</button></div>
+            <div class="button-container"><button class="operator" id="divide">÷</button></div>
+        </div>
+
+        <div class="row">
+            <div class="button-container"><button class="number" id="calc-7">7</button></div>
+            <div class="button-container"><button class="number" id="calc-8">8</button></div>
+            <div class="button-container"><button class="number" id="calc-9">9</button></div>
+            <div class="button-container"><button class="operator" id="multiply">×</button></div>
+        </div>
+
+        <div class="row">
+            <div class="button-container"><button class="number" id="calc-4">4</button></div>
+            <div class="button-container"><button class="number" id="calc-5">5</button></div>
+            <div class="button-container"><button class="number" id="calc-6">6</button></div>
+            <div class="button-container"><button class="operator" id="subtract">-</button></div>
+        </div>
+
+        <div class="row">
+            <div class="button-container"><button class="number" id="calc-1">1</button></div>
+            <div class="button-container"><button class="number" id="calc-2">2</button></div>
+            <div class="button-container"><button class="number" id="calc-3">3</button></div>
+            <div class="button-container"><button class="operator" id="add">+</button></div>
+        </div>
+
+        <div class="row">
+            <div class="button-container" id="zero-container"><button class="number" id="calc-0">0</button></div>
+            <div class="button-container"><button class="number" id="dec-point">.</button></div>
+            <div class="button-container"><button class="operator" id="equals">=</button></div>
+        </div>
+        
     </div>
     
     <script src="./script.js"></script>
