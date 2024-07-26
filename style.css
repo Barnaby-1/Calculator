@@ -23,3 +23,39 @@ body {
     border: solid red 2px;
     border-radius: 8px;
 }
+
+
+/* table stlying */
+
+table {
+    height: 100%;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+thead {
+    height: 10vh;
+    border: solid blue 2px;
+}
+
+.table-row {
+    border: solid black 2px;
+    width: 100%;
+}
+
+td {
+    border: solid black 2px;
+}
+
+#all-clear, #divide {
+    width: 50%;
+}
+
+.number, .operator {
+    width: 25%;
+}
+
+#calc-0 {
+    width: 33%;
+}
