@@ -17,15 +17,55 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+
+/* calculator styling */
+
 #calculator {
     height: 75vh;
     width: 35vw;
     border: solid red 2px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#output-container {
+    height: 20%;
+    font-size: 3rem;
+    display: flex;
+    justify-content: flex-end;
+    border: solid blue 2px;
+}
+
+#output-text {
+    margin-top: auto;
+    border: solid black 2px;
+}
+
+#all-clear-container {
+    flex: 0 0 75%;
+}
+
+#zero-container {
+    flex: 0 0 50%;
 }
 
 .row {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    flex-grow: 1;
+    border: solid red 2px;
+}
+
+.button-container {
+    display: flex;
+    width: 50%;
+    border: solid red 2px;
+}
+
+button {
+    flex: 1;
+    background-color: #858585;
 }
