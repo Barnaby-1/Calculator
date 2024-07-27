@@ -43,6 +43,7 @@ body {
 
 #output-text {
     margin-top: auto;
+    margin-right: 3%;
 }
 
 #all-clear-container {
@@ -89,7 +90,7 @@ button:active {
     border-bottom-right-radius: 6.25px;
 }
 
-button #all-clear, #calc-7, #calc-4, #calc-1, #calc-0 {
+#all-clear, #calc-7, #calc-4, #calc-1, #calc-0 {
     border-left: none;
 }
 
