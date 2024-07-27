@@ -15,6 +15,7 @@ body {
     font-size: 16px;
     text-align: center;
     font-family: "Roboto", sans-serif;
+    color: #fff;
 }
 
 
@@ -23,7 +24,7 @@ body {
 #calculator {
     height: 75vh;
     width: 35vw;
-    border: solid red 2px;
+    border: solid #c0c0c0 2px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -35,12 +36,13 @@ body {
     font-size: 3rem;
     display: flex;
     justify-content: flex-end;
-    border: solid blue 2px;
+    background-color: #353535;
+    border-top-left-radius: 6.25px;
+    border-top-right-radius: 6.25px;
 }
 
 #output-text {
     margin-top: auto;
-    border: solid black 2px;
 }
 
 #all-clear-container {
@@ -56,16 +58,46 @@ body {
     justify-content: center;
     flex-direction: row;
     flex-grow: 1;
-    border: solid red 2px;
 }
 
 .button-container {
     display: flex;
     width: 50%;
-    border: solid red 2px;
 }
 
 button {
     flex: 1;
-    background-color: #858585;
+    background-color: #696969;
+    color: #fff;
+    font-size: 3vw;
+    border: solid #000 1px;
+}
+
+button:active {
+    background-color: #a2a2a2;
+}
+
+#calc-0, #dec-point, #equals {
+    border-bottom: none;
+}
+
+#calc-0 {
+    border-bottom-left-radius: 6.25px;
+}
+
+#equals {
+    border-bottom-right-radius: 6.25px;
+}
+
+button #all-clear, #calc-7, #calc-4, #calc-1, #calc-0 {
+    border-left: none;
+}
+
+.operator {
+    border-right: none;
+    background-color: #ee8b17;
+}
+
+.operator:active {
+    background-color: #b6690d;
 }
