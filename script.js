@@ -31,3 +31,18 @@ const operate = (operator, num1, num2) => {
         divide(num1, num2);
     }
 }
+
+
+const output = document.getElementById('output-text');
+const buttons = document.getElementsByTagName('button');
+const allClear = document.getElementById('all-clear');
+const operators = document.getElementsByClassName('operator');
+
+const buttonClicks = () => {
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', () => {
+            output.textContent = buttons[i].textContent;
+        })
+    }
+}
+buttonClicks();
