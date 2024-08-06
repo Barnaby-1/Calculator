@@ -39,6 +39,17 @@ const output = document.getElementById('output-text');
 const buttons = document.getElementsByTagName('button');
 const allClear = document.getElementById('all-clear');
 const operators = document.getElementsByClassName('operator');
+const decPoint = document.getElementById('dec-point');
+
+const disableDecPoint = value => {
+    if (value.includes('.')) {
+        decPoint.disabled = true;
+    }
+}
+
+const enableDecPoint = () => {
+    decPoint.disabled = false;
+}
 
 const buttonClicks = () => {
     for (let i = 0; i < buttons.length; i++) {
@@ -51,7 +62,9 @@ const buttonClicks = () => {
                     }
                     // when firstOperator is equal to null any buttons that are clicked
                     // with 'number' in the className are assigned to firstNum
+                    enableDecPoint();
                     firstNum += buttonText;
+                    disableDecPoint(firstNum);
                     console.log('firstNum:', firstNum);
                     output.textContent = firstNum;
                 } else {
@@ -60,7 +73,9 @@ const buttonClicks = () => {
                     }
                     // when firstOperator has a truthy value the next buttons that are clicked
                     // with 'number' in the className are assigned to secondNum
+                    enableDecPoint();
                     secondNum += buttonText;
+                    disableDecPoint(secondNum);
                     console.log('secondNum:', secondNum)
                     output.textContent = secondNum;
                 }
@@ -91,4 +106,5 @@ const clearDisplay = () => {
     firstNum = null;
     firstOperator = null;
     secondNum = null;
+    enableDecPoint();
 }
