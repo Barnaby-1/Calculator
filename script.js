@@ -21,14 +21,16 @@ let firstOperator = null;
 let secondNum = null;
 
 const operate = (operator, num1, num2) => {
+    num1 = parseFloat(num1);
+    num2 = parseFloat(num2);
     if (operator === '+') {
-        add(num1, num2);
+        return add(num1, num2);
     } else if (operator === '-') {
-        subtract(num1, num2);
+        return subtract(num1, num2);
     } else if (operator === '×') {
-        multiply(num1, num2);
+        return multiply(num1, num2);
     } else if (operator === '÷') {
-        divide(num1, num2);
+        return divide(num1, num2);
     }
 }
 
@@ -43,26 +45,40 @@ const buttonClicks = () => {
         let buttonText = buttons[i].textContent;
         buttons[i].addEventListener('click', () => {
             if (buttons[i].className.includes('number')) {
-                if (firstNum === null && secondNum === null) {
-                    firstNum = '';
-                    secondNum = '';
+                if (firstOperator === null) {
+                    if (firstNum === null) {
+                        firstNum = '';
+                    }
+                    // when firstOperator is equal to null any buttons that are clicked
+                    // with 'number' in the className are assigned to firstNum
+                    firstNum += buttonText;
+                    console.log('firstNum:', firstNum);
+                    output.textContent = firstNum;
+                } else {
+                    if (secondNum === null) {
+                        secondNum = '';
+                    }
+                    // when firstOperator has a truthy value the next buttons that are clicked
+                    // with 'number' in the className are assigned to secondNum
+                    secondNum += buttonText;
+                    console.log('secondNum:', secondNum)
+                    output.textContent = secondNum;
                 }
-                // when a number is clicked assign firstNum to the textContent of the button and display the number
-                firstNum += buttonText;
-                console.log(firstNum);
-                output.textContent = firstNum;
             } else if (
-                // assign firstOperator to the textContent of the button that was clicked
-                // and if the textContent includes one of the operators listed
                 buttonText.includes('÷') ||
                 buttonText.includes('×') ||
                 buttonText.includes('-') ||
-                buttonText.includes('+') ||
-                buttonText.includes('=')) {
+                buttonText.includes('+')) {
+                    // assign firstOperator to the textContent of the button that was clicked
+                    // if the textContent includes one of the operators listed
                     firstOperator = buttonText;
                     console.log(firstOperator);
             } else if (buttonText === 'AC') {
                 clearDisplay();
+            } else if (buttonText.includes('=')) {
+                let result = operate(firstOperator, firstNum, secondNum);
+                console.log(result);
+                output.textContent = result;
             }
         })
     }
