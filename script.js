@@ -83,7 +83,8 @@ const buttonClicks = () => {
                     output.textContent = secondNum;
                 }
             } else if (buttonText.includes('=')) {
-                result = operate(firstOperator, firstNum, secondNum).toFixed(2).toString();
+                // calculate result when '=' is clicked and round to 5 decimal places excluding 0s on the end
+                result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
                 console.log(result);
                 output.textContent = result;
                 setNull();
@@ -95,7 +96,9 @@ const buttonClicks = () => {
                     buttonText.includes('×') ||
                     buttonText.includes('-') ||
                     buttonText.includes('+')) {
-                        result = operate(firstOperator, firstNum, secondNum).toFixed(2).toString();
+                        // calculate the result when firstOperater, firstNum and secondNum are true and
+                        // if either ÷, ×, - or + are clicked and round to 5 decimal places excluding 0s on the end
+                        result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
                         console.log(result);
                         output.textContent = result;
                         setNull();
