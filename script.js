@@ -89,6 +89,20 @@ const buttonClicks = () => {
                 setNull();
                 console.log('operator after setNull()', firstOperator);
                 firstNum = result;
+            } else if (firstOperator && firstNum && secondNum) {
+                if (
+                    buttonText.includes('÷') ||
+                    buttonText.includes('×') ||
+                    buttonText.includes('-') ||
+                    buttonText.includes('+')) {
+                        result = operate(firstOperator, firstNum, secondNum).toString();
+                        console.log(result);
+                        output.textContent = result;
+                        setNull();
+                        console.log('operator after setNull()', firstOperator)
+                        firstOperator = buttonText;
+                        firstNum = result;
+                }
             } else if (
                 buttonText.includes('÷') ||
                 buttonText.includes('×') ||
