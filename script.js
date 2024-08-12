@@ -83,7 +83,7 @@ const buttonClicks = () => {
                     output.textContent = secondNum;
                 }
             } else if (buttonText.includes('=')) {
-                result = operate(firstOperator, firstNum, secondNum).toString();
+                result = operate(firstOperator, firstNum, secondNum).toFixed(2).toString();
                 console.log(result);
                 output.textContent = result;
                 setNull();
@@ -95,7 +95,7 @@ const buttonClicks = () => {
                     buttonText.includes('×') ||
                     buttonText.includes('-') ||
                     buttonText.includes('+')) {
-                        result = operate(firstOperator, firstNum, secondNum).toString();
+                        result = operate(firstOperator, firstNum, secondNum).toFixed(2).toString();
                         console.log(result);
                         output.textContent = result;
                         setNull();
