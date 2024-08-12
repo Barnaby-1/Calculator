@@ -19,6 +19,7 @@ const divide = (num1, num2) => {
 let firstNum = null;
 let firstOperator = null;
 let secondNum = null;
+let result = null;
 
 const operate = (operator, num1, num2) => {
     num1 = parseFloat(num1);
@@ -55,7 +56,9 @@ const buttonClicks = () => {
     for (let i = 0; i < buttons.length; i++) {
         let buttonText = buttons[i].textContent;
         buttons[i].addEventListener('click', () => {
-            if (buttons[i].className.includes('number')) {
+            if (buttonText === 'AC') {
+                clearDisplay();
+            } else if (buttons[i].className.includes('number')) {
                 if (firstOperator === null) {
                     if (firstNum === null) {
                         firstNum = '';
@@ -79,21 +82,22 @@ const buttonClicks = () => {
                     console.log('secondNum:', secondNum)
                     output.textContent = secondNum;
                 }
+            } else if (buttonText.includes('=')) {
+                result = operate(firstOperator, firstNum, secondNum).toString();
+                console.log(result);
+                output.textContent = result;
+                setNull();
+                console.log('operator after setNull()', firstOperator);
+                firstNum = result;
             } else if (
                 buttonText.includes('÷') ||
                 buttonText.includes('×') ||
                 buttonText.includes('-') ||
                 buttonText.includes('+')) {
-                    // assign firstOperator to the textContent of the button that was clicked
-                    // if the textContent includes one of the operators listed
-                    firstOperator = buttonText;
-                    console.log(firstOperator);
-            } else if (buttonText === 'AC') {
-                clearDisplay();
-            } else if (buttonText.includes('=')) {
-                let result = operate(firstOperator, firstNum, secondNum);
-                console.log(result);
-                output.textContent = result;
+                // assign firstOperator to the textContent of the button that was clicked
+                // if the textContent includes one of the operators listed
+                firstOperator = buttonText;
+                console.log(firstOperator);
             }
         })
     }
@@ -107,4 +111,10 @@ const clearDisplay = () => {
     firstOperator = null;
     secondNum = null;
     enableDecPoint();
+}
+
+const setNull = () => {
+    firstNum = null;
+    secondNum = null;
+    firstOperator = null;
 }
