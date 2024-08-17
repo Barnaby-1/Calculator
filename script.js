@@ -60,7 +60,11 @@ const buttonClicks = () => {
             // assigns true to calculationDone when firstOperator is falsy
             // to make it so when a calculation needs to be done with a previous
             // result calculationDone stays as false
-            calculationDone = !firstOperator;
+            if (firstOperator && firstNum && secondNum) {
+                calculationDone = true;
+            } else {
+                calculationDone = false;
+            }
             if (buttonText === 'AC') {
                 clearDisplay();
                 calculationDone = false;
@@ -84,6 +88,7 @@ const buttonClicks = () => {
                     // with 'number' in the className are assigned to firstNum
                     result = null;
                     enableDecPoint();
+                    console.log('firstOperator', firstOperator);
                     console.log('firstNum:', firstNum);
                     firstNum += buttonText;
                     disableDecPoint(firstNum);
@@ -149,7 +154,7 @@ const buttonClicks = () => {
                 // assign firstOperator to the textContent of the button that was clicked
                 // if the textContent includes one of the operators listed
                 firstOperator = buttonText;
-                console.log(firstOperator);
+                console.log('firstOperator:', firstOperator);
             }
         })
     }
