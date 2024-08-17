@@ -20,6 +20,7 @@ let firstNum = null;
 let firstOperator = null;
 let secondNum = null;
 let result = null;
+let calculationDone = null;
 
 const operate = (operator, num1, num2) => {
     num1 = parseFloat(num1);
@@ -56,16 +57,34 @@ const buttonClicks = () => {
     for (let i = 0; i < buttons.length; i++) {
         let buttonText = buttons[i].textContent;
         buttons[i].addEventListener('click', () => {
+            // assigns true to calculationDone when firstOperator is falsy
+            // to make it so when a calculation needs to be done with a previous
+            // result calculationDone stays as false
+            calculationDone = !firstOperator;
             if (buttonText === 'AC') {
                 clearDisplay();
+                calculationDone = false;
             } else if (buttons[i].className.includes('number')) {
+                if (calculationDone) {
+                    // reset variables when a calculation has been done where 
+                    // firstOperator, firstNum and secondNum are truthy to prevent
+                    // firstNum from adding to what has already been output
+                    firstNum = '';
+                    secondNum = '';
+                    firstOperator = null;
+                    result = null;
+                    output.textContent = null;
+                    calculationDone = false;
+                }
                 if (firstOperator === null) {
                     if (firstNum === null) {
                         firstNum = '';
                     }
                     // when firstOperator is equal to null any buttons that are clicked
                     // with 'number' in the className are assigned to firstNum
+                    result = null;
                     enableDecPoint();
+                    console.log('firstNum:', firstNum);
                     firstNum += buttonText;
                     disableDecPoint(firstNum);
                     console.log('firstNum:', firstNum);
@@ -83,13 +102,29 @@ const buttonClicks = () => {
                     output.textContent = secondNum;
                 }
             } else if (buttonText.includes('=')) {
-                // calculate result when '=' is clicked and round to 5 decimal places excluding 0s on the end
-                result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
-                console.log(result);
-                output.textContent = result;
-                setNull();
-                console.log('operator after setNull()', firstOperator);
-                firstNum = result;
+                if (!firstNum && firstOperator && secondNum) {
+                    // calculate result when '=' is clicked when doing a calculation on a previous result
+                    result = parseFloat(operate(firstOperator, result, secondNum).toFixed(5));
+                    console.log(result);
+                    output.textContent = result;
+                    setNull();
+                    console.log('setNull() called');
+                } else if (!secondNum && firstOperator && firstNum) {
+                    // calculate result when '=' is clicked when secondNum is a falsy value
+                    result = parseFloat(operate(firstOperator, firstNum, firstNum).toFixed(5));
+                    console.log(result);
+                    output.textContent = result;
+                    setNull();
+                    console.log('setNull() called');
+                } else if (firstOperator && firstNum && secondNum) {
+                    // calculate result when firstOperator, firstNum and secondNum are all truthy
+                    result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
+                    console.log(result);
+                    output.textContent = result;
+                    setNull();
+                    console.log('setNull() called');
+                    firstNum = result;
+                }
             } else if (firstOperator && firstNum && secondNum) {
                 if (
                     buttonText.includes('÷') ||
