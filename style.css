@@ -33,7 +33,6 @@ body {
 
 #output-container {
     height: 20%;
-    font-size: 3rem;
     display: flex;
     justify-content: flex-end;
     background-color: #353535;
@@ -42,8 +41,8 @@ body {
 }
 
 #output-text {
-    margin-top: auto;
-    margin-right: 3%;
+    margin: auto 3% 0 3%;
+    font-size: clamp(3.5rem, 5vw, 6rem);
 }
 
 #all-clear-container {

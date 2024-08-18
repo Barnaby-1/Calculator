@@ -60,14 +60,9 @@ const buttonClicks = () => {
             // assigns true to calculationDone when firstOperator is falsy
             // to make it so when a calculation needs to be done with a previous
             // result calculationDone stays as false
-            if (firstOperator && firstNum && secondNum) {
-                calculationDone = true;
-            } else {
-                calculationDone = false;
-            }
+            calculationDone = false;
             if (buttonText === 'AC') {
                 clearDisplay();
-                calculationDone = false;
             } else if (buttons[i].className.includes('number')) {
                 if (calculationDone) {
                     // reset variables when a calculation has been done where 
@@ -110,6 +105,9 @@ const buttonClicks = () => {
                 if (!firstNum && firstOperator && secondNum) {
                     // calculate result when '=' is clicked when doing a calculation on a previous result
                     result = parseFloat(operate(firstOperator, result, secondNum).toFixed(5));
+                    if (result === null || result === NaN || result === Infinity) {
+                        result = 'Not a number';
+                    }
                     console.log(result);
                     output.textContent = result;
                     setNull();
@@ -117,6 +115,9 @@ const buttonClicks = () => {
                 } else if (!secondNum && firstOperator && firstNum) {
                     // calculate result when '=' is clicked when secondNum is a falsy value
                     result = parseFloat(operate(firstOperator, firstNum, firstNum).toFixed(5));
+                    if (result === null || result === NaN || result === Infinity) {
+                        result = 'Not a number';
+                    }
                     console.log(result);
                     output.textContent = result;
                     setNull();
@@ -124,6 +125,9 @@ const buttonClicks = () => {
                 } else if (firstOperator && firstNum && secondNum) {
                     // calculate result when firstOperator, firstNum and secondNum are all truthy
                     result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
+                    if (result === null || result === NaN || result === Infinity) {
+                        result = 'Not a number';
+                    }
                     console.log(result);
                     output.textContent = result;
                     setNull();
@@ -167,11 +171,14 @@ const clearDisplay = () => {
     firstNum = null;
     firstOperator = null;
     secondNum = null;
+    result = null;
     enableDecPoint();
+    calculationDone = false;
 }
 
 const setNull = () => {
     firstNum = null;
     secondNum = null;
     firstOperator = null;
+    calculationDone = true;
 }
