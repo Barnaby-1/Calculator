@@ -60,24 +60,18 @@ const buttonClicks = () => {
             // assigns true to calculationDone when firstOperator is falsy
             // to make it so when a calculation needs to be done with a previous
             // result calculationDone stays as false
-            calculationDone = false;
             if (buttonText === 'AC') {
                 clearDisplay();
             } else if (buttons[i].className.includes('number')) {
-                if (calculationDone) {
-                    // reset variables when a calculation has been done where 
-                    // firstOperator, firstNum and secondNum are truthy to prevent
-                    // firstNum from adding to what has already been output
-                    firstNum = '';
-                    secondNum = '';
-                    firstOperator = null;
-                    result = null;
-                    output.textContent = null;
-                    calculationDone = false;
-                }
                 if (firstOperator === null) {
                     if (firstNum === null) {
                         firstNum = '';
+                    } else if (firstNum.length > 0) {
+                        calculationDone = false;
+                        console.log('calculationDone: ', calculationDone);
+                    } else {
+                        calculationDone = true;
+                        console.log('calculationDone: ', calculationDone);
                     }
                     // when firstOperator is equal to null any buttons that are clicked
                     // with 'number' in the className are assigned to firstNum
@@ -101,17 +95,32 @@ const buttonClicks = () => {
                     console.log('secondNum:', secondNum)
                     output.textContent = secondNum;
                 }
+                if (calculationDone) {
+                    // reset variables when a calculation has been done to preventxxq
+                    // firstNum from adding to what has already been output
+                    firstNum = firstNum.split('');
+                    console.log(firstNum);
+                    firstNum = firstNum.splice(firstNum.length - 1, 1);
+                    console.log(typeof firstNum);
+                    console.log(firstNum);
+                    // secondNum = '';
+                    firstOperator = null;
+                    // result = null;
+                    output.textContent = firstNum;
+                    calculationDone = false;
+                }
+                console.log('firstNum:', firstNum);
             } else if (buttonText.includes('=')) {
                 if (!firstNum && firstOperator && secondNum) {
-                    // calculate result when '=' is clicked when doing a calculation on a previous result
-                    result = parseFloat(operate(firstOperator, result, secondNum).toFixed(5));
-                    if (result === null || result === NaN || result === Infinity) {
+                    result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
+                    if (result === null || result === NaN || result === Infinity || (secondNum === '0' && firstOperator === '÷')) {
                         result = 'Not a number';
                     }
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('setNull() called');
+                    console.log('calculationDone: ', calculationDone);
+                    firstNum = result;
                 } else if (!secondNum && firstOperator && firstNum) {
                     // calculate result when '=' is clicked when secondNum is a falsy value
                     result = parseFloat(operate(firstOperator, firstNum, firstNum).toFixed(5));
@@ -121,7 +130,7 @@ const buttonClicks = () => {
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('setNull() called');
+                    console.log('calculationDone: ', calculationDone);
                 } else if (firstOperator && firstNum && secondNum) {
                     // calculate result when firstOperator, firstNum and secondNum are all truthy
                     result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
@@ -131,7 +140,7 @@ const buttonClicks = () => {
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('setNull() called');
+                    console.log('calculationDone: ', calculationDone);
                     firstNum = result;
                 }
             } else if (firstOperator && firstNum && secondNum) {
@@ -146,8 +155,8 @@ const buttonClicks = () => {
                         console.log(result);
                         output.textContent = result;
                         setNull();
-                        console.log('operator after setNull()', firstOperator)
                         firstOperator = buttonText;
+                        console.log('firstOperator:', firstOperator);
                         firstNum = result;
                 }
             } else if (
@@ -157,6 +166,9 @@ const buttonClicks = () => {
                 buttonText.includes('+')) {
                 // assign firstOperator to the textContent of the button that was clicked
                 // if the textContent includes one of the operators listed
+                if (firstNum === null) {
+                    firstNum = 0;
+                }
                 firstOperator = buttonText;
                 console.log('firstOperator:', firstOperator);
             }
@@ -180,5 +192,4 @@ const setNull = () => {
     firstNum = null;
     secondNum = null;
     firstOperator = null;
-    calculationDone = true;
 }
