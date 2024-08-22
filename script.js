@@ -68,10 +68,8 @@ const buttonClicks = () => {
                         firstNum = '';
                     } else if (firstNum.length > 0) {
                         calculationDone = false;
-                        console.log('calculationDone: ', calculationDone);
                     } else {
                         calculationDone = true;
-                        console.log('calculationDone: ', calculationDone);
                     }
                     // when firstOperator is equal to null any buttons that are clicked
                     // with 'number' in the className are assigned to firstNum
@@ -96,22 +94,28 @@ const buttonClicks = () => {
                     output.textContent = secondNum;
                 }
                 if (calculationDone) {
-                    // reset variables when a calculation has been done to preventxxq
+                    // reset variables when a calculation has been done to prevent
                     // firstNum from adding to what has already been output
+                    // converts firstNum to an array and removes all the elements
+                    // apart from the last one which is the new firstNum
                     firstNum = firstNum.split('');
                     console.log(firstNum);
                     firstNum = firstNum.splice(firstNum.length - 1, 1);
                     console.log(typeof firstNum);
                     console.log(firstNum);
-                    // secondNum = '';
                     firstOperator = null;
-                    // result = null;
                     output.textContent = firstNum;
                     calculationDone = false;
                 }
                 console.log('firstNum:', firstNum);
             } else if (buttonText.includes('=')) {
-                if (!firstNum && firstOperator && secondNum) {
+                if ((firstNum === 'Not a number' || result === 'Not a number') && secondNum && firstOperator) {
+                    result = 'Not a number';
+                    console.log(result);
+                    output.textContent = result;
+                    setNull();
+                    firstNum = result;
+                } else if (!firstNum && firstOperator && secondNum) {
                     result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
                     if (result === null || result === NaN || result === Infinity || (secondNum === '0' && firstOperator === '÷')) {
                         result = 'Not a number';
@@ -119,7 +123,6 @@ const buttonClicks = () => {
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('calculationDone: ', calculationDone);
                     firstNum = result;
                 } else if (!secondNum && firstOperator && firstNum) {
                     // calculate result when '=' is clicked when secondNum is a falsy value
@@ -130,7 +133,6 @@ const buttonClicks = () => {
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('calculationDone: ', calculationDone);
                 } else if (firstOperator && firstNum && secondNum) {
                     // calculate result when firstOperator, firstNum and secondNum are all truthy
                     result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
@@ -140,7 +142,6 @@ const buttonClicks = () => {
                     console.log(result);
                     output.textContent = result;
                     setNull();
-                    console.log('calculationDone: ', calculationDone);
                     firstNum = result;
                 }
             } else if (firstOperator && firstNum && secondNum) {
