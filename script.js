@@ -63,7 +63,7 @@ const buttonClicks = () => {
             if (buttonText === 'AC') {
                 clearDisplay();
             } else if (buttons[i].className.includes('number')) {
-                if (firstOperator === null) {
+                if (firstOperator === null /*|| firstNum === '-' */) {
                     if (firstNum === null) {
                         firstNum = '';
                     } else if (firstNum.length > 0) {
@@ -160,6 +160,11 @@ const buttonClicks = () => {
                         console.log('firstOperator:', firstOperator);
                         firstNum = result;
                 }
+            } else if (buttonText.includes('-') && firstNum === null) {
+                // assigns '-' to firstNum if '-' is the 
+                firstNum = '-';
+                console.log('firstNum:', firstNum);
+                console.log('firstOperator:', firstOperator);
             } else if (
                 buttonText.includes('÷') ||
                 buttonText.includes('×') ||
