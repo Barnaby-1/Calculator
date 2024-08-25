@@ -60,6 +60,7 @@ const buttonClicks = () => {
             // assigns true to calculationDone when firstOperator is falsy
             // to make it so when a calculation needs to be done with a previous
             // result calculationDone stays as false
+            disableButtons();
             if (buttonText === 'AC') {
                 clearDisplay();
             } else if (buttons[i].className.includes('number')) {
@@ -75,6 +76,7 @@ const buttonClicks = () => {
                     // with 'number' in the className are assigned to firstNum
                     result = null;
                     enableDecPoint();
+                    disableButtons();
                     console.log('firstOperator', firstOperator);
                     console.log('firstNum:', firstNum);
                     firstNum += buttonText;
@@ -88,6 +90,7 @@ const buttonClicks = () => {
                     // when firstOperator has a truthy value the next buttons that are clicked
                     // with 'number' in the className are assigned to secondNum
                     enableDecPoint();
+                    disableButtons();
                     secondNum += buttonText;
                     disableDecPoint(secondNum);
                     console.log('secondNum:', secondNum)
@@ -198,4 +201,16 @@ const setNull = () => {
     firstNum = null;
     secondNum = null;
     firstOperator = null;
+}
+
+const disableButtons = () => {
+    // disables the number buttons if the amount of characters in the output text is equal to 10
+    for (let i = 0; i < buttons.length; i++) {
+        if (output.textContent.length === 10 && buttons[i].className.includes('number')) {
+            buttons[i].disabled = true;
+            disableDecPoint(firstNum);
+        } else {
+            buttons[i].disabled = false;
+        }
+    }
 }
