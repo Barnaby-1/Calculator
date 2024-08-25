@@ -43,15 +43,6 @@ const allClear = document.getElementById('all-clear');
 const operators = document.getElementsByClassName('operator');
 const decPoint = document.getElementById('dec-point');
 
-const disableDecPoint = value => {
-    if (value.includes('.')) {
-        decPoint.disabled = true;
-    }
-}
-
-const enableDecPoint = () => {
-    decPoint.disabled = false;
-}
 
 const buttonClicks = () => {
     for (let i = 0; i < buttons.length; i++) {
@@ -77,11 +68,8 @@ const buttonClicks = () => {
                     result = null;
                     enableDecPoint();
                     disableButtons();
-                    console.log('firstOperator', firstOperator);
-                    console.log('firstNum:', firstNum);
                     firstNum += buttonText;
                     disableDecPoint(firstNum);
-                    console.log('firstNum:', firstNum);
                     output.textContent = firstNum;
                 } else {
                     if (secondNum === null) {
@@ -93,7 +81,6 @@ const buttonClicks = () => {
                     disableButtons();
                     secondNum += buttonText;
                     disableDecPoint(secondNum);
-                    console.log('secondNum:', secondNum)
                     output.textContent = secondNum;
                 }
                 if (calculationDone) {
@@ -102,19 +89,14 @@ const buttonClicks = () => {
                     // converts firstNum to an array and removes all the elements
                     // apart from the last one which is the new firstNum
                     firstNum = firstNum.split('');
-                    console.log(firstNum);
                     firstNum = firstNum.splice(firstNum.length - 1, 1);
-                    console.log(typeof firstNum);
-                    console.log(firstNum);
                     firstOperator = null;
                     output.textContent = firstNum;
                     calculationDone = false;
                 }
-                console.log('firstNum:', firstNum);
             } else if (buttonText.includes('=')) {
                 if ((firstNum === 'Not a number' || result === 'Not a number') && secondNum && firstOperator) {
                     result = 'Not a number';
-                    console.log(result);
                     output.textContent = result;
                     setNull();
                     firstNum = result;
@@ -123,7 +105,6 @@ const buttonClicks = () => {
                     if (result === null || result === NaN || result === Infinity || (secondNum === '0' && firstOperator === '÷')) {
                         result = 'Not a number';
                     }
-                    console.log(result);
                     output.textContent = result;
                     setNull();
                     firstNum = result;
@@ -133,7 +114,6 @@ const buttonClicks = () => {
                     if (result === null || result === NaN || result === Infinity) {
                         result = 'Not a number';
                     }
-                    console.log(result);
                     output.textContent = result;
                     setNull();
                 } else if (firstOperator && firstNum && secondNum) {
@@ -142,7 +122,6 @@ const buttonClicks = () => {
                     if (result === null || result === NaN || result === Infinity) {
                         result = 'Not a number';
                     }
-                    console.log(result);
                     output.textContent = result;
                     setNull();
                     firstNum = result;
@@ -156,18 +135,14 @@ const buttonClicks = () => {
                         // calculate the result when firstOperater, firstNum and secondNum are true and
                         // if either ÷, ×, - or + are clicked and round to 5 decimal places excluding 0s on the end
                         result = parseFloat(operate(firstOperator, firstNum, secondNum).toFixed(5));
-                        console.log(result);
                         output.textContent = result;
                         setNull();
                         firstOperator = buttonText;
-                        console.log('firstOperator:', firstOperator);
                         firstNum = result;
                 }
             } else if (buttonText.includes('-') && firstNum === null) {
                 // assigns '-' to firstNum if '-' is the first button pressed and firstNum is equal to null
                 firstNum = '-';
-                console.log('firstNum:', firstNum);
-                console.log('firstOperator:', firstOperator);
             } else if (
                 buttonText.includes('÷') ||
                 buttonText.includes('×') ||
@@ -179,7 +154,6 @@ const buttonClicks = () => {
                     firstNum = 0;
                 }
                 firstOperator = buttonText;
-                console.log('firstOperator:', firstOperator);
             }
         })
     }
@@ -201,6 +175,16 @@ const setNull = () => {
     firstNum = null;
     secondNum = null;
     firstOperator = null;
+}
+
+const disableDecPoint = value => {
+    if (value.includes('.')) {
+        decPoint.disabled = true;
+    }
+}
+
+const enableDecPoint = () => {
+    decPoint.disabled = false;
 }
 
 const disableButtons = () => {
