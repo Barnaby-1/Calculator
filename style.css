@@ -22,8 +22,8 @@ body {
 /* calculator styling */
 
 #calculator {
-    height: 75vh;
-    width: 35vw;
+    width: 600px;
+    height: 800px;
     border: solid #c0c0c0 2px;
     border-radius: 8px;
     display: flex;
@@ -38,11 +38,13 @@ body {
     background-color: #353535;
     border-top-left-radius: 6.25px;
     border-top-right-radius: 6.25px;
+    border: solid red 2px;
 }
 
 #output-text {
     margin: auto 3% 0 3%;
-    font-size: clamp(3.5rem, 5vw, 6rem);
+    font-size: 5rem;
+    border: solid red 2px;
 }
 
 #all-clear-container {
@@ -69,7 +71,7 @@ button {
     flex: 1;
     background-color: #696969;
     color: #fff;
-    font-size: 3vw;
+    font-size: 3rem;
     border: solid #000 1px;
 }
 
@@ -100,4 +102,28 @@ button:active {
 
 .operator:active {
     background-color: #b6690d;
+}
+
+
+/* responsive design (media queries) */
+
+@media (max-height: 800px) {
+    #calculator {
+        max-width: 400px;
+        max-height: 600px;
+    }
+    #output-text { font-size: 3.4rem; }
+    button { font-size: 2.25rem; }
+}
+
+@media (max-width: 532px) {
+    #calculator { max-width: 400px; }
+    #output-text { font-size:  3.4rem; }
+    button { font-size: 2.25rem; }
+}
+
+@media (max-width: 366px) {
+    #calculator { max-width: 325px; }
+    #output-text { font-size: 3rem; }
+    button { font-size: 2rem; }
 }
